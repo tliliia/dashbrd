@@ -8,6 +8,9 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+    mvc:
+      pathmatch:
+        matching-strategy: ant_path_matcher
 server:
   port: 8080
 flyway:
@@ -15,3 +18,7 @@ flyway:
   schemas: public
   user: postgres
   password: postgres
+springdoc:
+  enable-native-support: true
+  swagger-ui.path: /swagger-ui
+
