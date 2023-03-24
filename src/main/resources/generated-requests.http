@@ -1,0 +1,57 @@
+###
+GET http://localhost:8080/tasks
+
+<> 2023-03-24T164743.200.json
+
+###
+GET http://localhost:8080/tasks/10
+
+<> 2023-03-24T164845.400.json
+<> 2023-03-24T164834.400.json
+<> 2023-03-24T164817.400.json
+
+###
+GET http://localhost:8080/tasks/release/1
+
+<> 2023-03-24T213114.200.json
+<> 2023-03-24T213054.200.json
+<> 2023-03-24T165110.200.json
+<> 2023-03-24T164944.200.json
+
+###
+DELETE http://localhost:8080/tasks/1
+
+###
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "id": 100,
+  "title": "Приложение использует ресурсные файлы локализации",
+  "status": "BACKLOG",
+  "release": 2,
+  "owner": 1
+}
+
+<> 2023-03-24T211314.400.json
+<> 2023-03-24T211234.400.json
+<> 2023-03-24T165632.400.html
+<> 2023-03-24T165607.400.html
+
+###
+GET http://localhost:8080/releases/users/
+
+<> 2023-03-24T225031.200.json
+<> 2023-03-24T165827.200.json
+
+###
+GET http://localhost:8080/releases/users/2
+
+<> 2023-03-24T225039.400.json
+<> 2023-03-24T165930.400.json
+<> 2023-03-24T165847.400.json
+
+###
+GET http://localhost:8080/releases
+
+<> 2023-03-24T165911.200.json
