@@ -4,6 +4,7 @@ package com.tronina.dashbrd.service;
 import com.tronina.dashbrd.exception.BLException;
 import com.tronina.dashbrd.entity.Status;
 import com.tronina.dashbrd.entity.Task;
+import com.tronina.dashbrd.exception.TaskStatusChangeNotAllowedException;
 import com.tronina.dashbrd.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,18 +40,28 @@ public class TaskService extends AbstractService<Task, TaskRepository> {
     }
 
     public void startTask(Long taskId) {
-        Task task = repository.getReferenceById(taskId);
-        if (releaseService.isStarted(task.getRelease())) {
+        Task task = findById(taskId);
+        if (!releaseService.isStarted(task.getRelease())) {
+            throw new BLException("Релиз не стартовал");
+        } else {
             if (!task.getStatus().equals(Status.BACKLOG)) {
-                throw new BLException("Переход из текущего состояния не поддерживается");
+                throw new TaskStatusChangeNotAllowedException(taskId, Status.IN_PROGRESS);
             }
             task.setStatus(Status.IN_PROGRESS);
             update(task.getId(), task);
-        } else {
-            throw new RuntimeException("Релиз не стартовал");
         }
     }
 
-    public void finishTask(Long id) {
+    public void finishTask(Long taskId) {
+        Task task = findById(taskId);
+        if (!releaseService.isStarted(task.getRelease())) {
+            throw new BLException("Релиз не стартовал");
+        } else {
+            if (!task.getStatus().equals(Status.IN_PROGRESS)) {
+                throw new TaskStatusChangeNotAllowedException(taskId, Status.DONE);
+            }
+            task.setStatus(Status.DONE);
+            update(task.getId(), task);
+        }
     }
 }

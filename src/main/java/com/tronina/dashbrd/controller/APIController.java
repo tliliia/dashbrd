@@ -89,7 +89,7 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
         return ResponseEntity.ok(service.create(element));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{elementId}")
     @Operation(summary = "Удалить элемент по Id")
     @ApiResponses(value = {
             @ApiResponse(
@@ -102,7 +102,7 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
             @ApiResponse(responseCode = "401", description = "Неавторизованный пользователь", content = @Content),
             @ApiResponse(responseCode = "403", description = "Доступ запрещен", content = @Content),
             @ApiResponse(responseCode = "404", description = "Объект не найден", content = @Content)})
-    public ResponseEntity<Boolean> deleteById(@RequestBody Long elementId) {
+    public ResponseEntity<Boolean> deleteById(@PathVariable Long elementId) {
         service.deleteById(elementId);
         return ResponseEntity.noContent().build();
     }

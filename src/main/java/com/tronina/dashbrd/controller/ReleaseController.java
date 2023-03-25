@@ -3,6 +3,7 @@ package com.tronina.dashbrd.controller;
 
 import com.tronina.dashbrd.entity.Release;
 import com.tronina.dashbrd.service.ReleaseService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,4 +25,11 @@ public class ReleaseController extends APIController<Release, ReleaseService> {
     ● Управление задачами (создание, редактирование, удаление)
     ● Процесс выполнения задач (смена статуса задачи) и завершение выполнения проекта
      */
+    @Operation(summary = "Закрыть проект")
+    @PatchMapping("/{id}/close")
+    public ResponseEntity close(@PathVariable("id") Long id) {
+        service.close(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

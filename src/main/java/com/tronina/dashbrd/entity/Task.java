@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /*Задача может находится в одном из трех статусов (BACKLOG, IN_PROGRESS, DONE).
 У задачи должны быть указаны автор, исполнитель, версия релиза.
@@ -39,6 +40,12 @@ public class Task extends BaseEntity {
 
     @Override
     public BaseEntity fillFromModel(BaseEntity model) {
+        if (model instanceof  Task) {
+            if (!Objects.equals(this.title, ((Task) model).getTitle())) {
+                this.title = ((Task) model).getTitle();
+            }
+
+        }
         return this;
     }
 }

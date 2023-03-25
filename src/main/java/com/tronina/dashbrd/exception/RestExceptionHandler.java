@@ -20,6 +20,16 @@ import java.time.format.DateTimeParseException;
 @ControllerAdvice()
 public class RestExceptionHandler {
 
+  @ExceptionHandler(BLException.class)
+  protected <T extends BLException> ResponseEntity<ErrorResponse> exceptionHandler(T exception) {
+    return new ResponseEntity<>(createErrorResponse(exception), HttpStatus.METHOD_NOT_ALLOWED);
+  }
+
+  @ExceptionHandler(TaskStatusChangeNotAllowedException.class)
+  protected <T extends TaskStatusChangeNotAllowedException> ResponseEntity<ErrorResponse> exceptionHandler(T exception) {
+    return new ResponseEntity<>(createErrorResponse(exception), HttpStatus.METHOD_NOT_ALLOWED);
+  }
+
   @ExceptionHandler(NotFoundEntityException.class)
   protected <T extends NotFoundEntityException> ResponseEntity<ErrorResponse> exceptionHandler(T exception) {
     return new ResponseEntity<>(createErrorResponse(exception), HttpStatus.NOT_FOUND);

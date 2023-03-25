@@ -1,22 +1,36 @@
 ###
-GET http://localhost:8080/tasks
-
-<> 2023-03-24T164743.200.json
+GET http://localhost:8080/users
 
 ###
-GET http://localhost:8080/tasks/10
+GET http://localhost:8080/users/1
 
-<> 2023-03-24T164845.400.json
-<> 2023-03-24T164834.400.json
-<> 2023-03-24T164817.400.json
+###
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+
+{
+  "login": "SUPER ADMIN"
+}
+
+###
+POST http://localhost:8080/users/
+Content-Type: application/json
+
+{
+  "login": "SUPER ADMIN"
+}
+
+
+###
+GET http://localhost:8080/tasks
+
+###
+GET http://localhost:8080/tasks/1
+
 
 ###
 GET http://localhost:8080/tasks/release/1
 
-<> 2023-03-24T213114.200.json
-<> 2023-03-24T213054.200.json
-<> 2023-03-24T165110.200.json
-<> 2023-03-24T164944.200.json
 
 ###
 DELETE http://localhost:8080/tasks/1

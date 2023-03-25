@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,6 +32,18 @@ public class Release extends BaseEntity {
 
     @Override
     public BaseEntity fillFromModel(BaseEntity model) {
+        if (model instanceof Release) {
+            Release releaseModel = (Release) model;
+            if (!Objects.equals(this.version, releaseModel.getVersion())) {
+                this.version = releaseModel.getVersion();
+            }
+            if (releaseModel.dateStart != null && this.dateStart.compareTo(releaseModel.dateStart) != 0) {
+                this.dateStart = releaseModel.getDateStart();
+            }
+            if (releaseModel.dateEnd != null && this.dateEnd.compareTo(releaseModel.dateEnd) != 0) {
+                this.dateEnd = releaseModel.getDateEnd();
+            }
+        }
         return this;
     }
 }
