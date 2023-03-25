@@ -11,6 +11,9 @@ spring:
     mvc:
       pathmatch:
         matching-strategy: ant_path_matcher
+    jackson:
+      serialization:
+        fail-on-empty-beans=false:
 server:
   port: 8080
 flyway:

@@ -5,7 +5,6 @@ import com.tronina.dashbrd.exception.BLException;
 import com.tronina.dashbrd.entity.Status;
 import com.tronina.dashbrd.entity.Task;
 import com.tronina.dashbrd.repository.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +13,13 @@ import java.util.List;
 @Service
 public class TaskService extends AbstractService<Task, TaskRepository> {
 
-    public TaskService(TaskRepository repository) {
+    final private ReleaseService releaseService;
+
+    public TaskService(TaskRepository repository, ReleaseService releaseService) {
         super(repository);
+        this.releaseService = releaseService;
     }
 
-    @Autowired
-    private ReleaseService releaseService;
 
     /**
      * Вернуть список задач для релиза

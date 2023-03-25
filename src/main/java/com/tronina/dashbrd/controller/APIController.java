@@ -20,7 +20,7 @@ import java.util.List;
  * Абстрактный контроллер с круд операциями
  */
 @RequiredArgsConstructor
-public abstract class APIController <E extends BaseEntity, S extends AbstractService> {
+public abstract class APIController <E extends BaseEntity, S extends AbstractService<E, ?>> {
     protected final S service;
 
     @GetMapping("/{id}")
@@ -37,7 +37,7 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
             @ApiResponse(responseCode = "403", description = "Доступ запрещен", content = @Content),
             @ApiResponse(responseCode = "404", description = "Объект не найден", content = @Content)})
     public ResponseEntity<E> getById(@PathVariable Long id) {
-        return (ResponseEntity<E>) ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("")
@@ -71,7 +71,7 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
             @ApiResponse(responseCode = "403", description = "Доступ запрещен", content = @Content),
             @ApiResponse(responseCode = "404", description = "Объект не найден", content = @Content)})
     public ResponseEntity<E> saveOrUpdate(@RequestBody E element) throws Exception {
-        return (ResponseEntity<E>) ResponseEntity.ok(service.saveOrUpdate(element));
+        return ResponseEntity.ok(service.saveOrUpdate(element));
     }
 
     @DeleteMapping

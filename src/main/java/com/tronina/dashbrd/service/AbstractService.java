@@ -17,7 +17,7 @@ public abstract class AbstractService<E extends BaseEntity, R extends BaseReposi
     }
 
     public E findById(long id) {
-        return repository.getReferenceById(id);
+        return repository.findById(id).get();
     }
 
     public List<E> findAll() {
