@@ -36,4 +36,9 @@ public class Task extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "performer_id")
     private User performer;
+
+    @Override
+    public BaseEntity fillFromModel(BaseEntity model) {
+        return this;
+    }
 }

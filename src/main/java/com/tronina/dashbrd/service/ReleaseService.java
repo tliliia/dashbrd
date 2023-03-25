@@ -47,17 +47,12 @@ public class ReleaseService extends AbstractService<Release, ReleaseRepository> 
     public void close(Release release) {
         if (canBeClosed(release)) {
             release.setDateEnd(new Date(Calendar.getInstance().getTimeInMillis()));
-            saveOrUpdate(release);
+            update(release.getId(), release);
         }
     }
 
     //Base methods
     public List<Task> getAllTasks(Release release) {
         return taskRepository.findAllByReleaseId(release.getId());
-    }
-
-    public Release updateRelease(long releaseId, Release release) {
-        Release originalRelease = repository.getReferenceById(releaseId);
-        return saveOrUpdate(originalRelease);
     }
 }

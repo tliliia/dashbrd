@@ -24,12 +24,4 @@ public class ReleaseController extends APIController<Release, ReleaseService> {
     ● Управление задачами (создание, редактирование, удаление)
     ● Процесс выполнения задач (смена статуса задачи) и завершение выполнения проекта
      */
-
-    //    @Operation(summary = "Обновить проект")
-    @PutMapping("/{id}")
-    public ResponseEntity<Release> updateRelease(@RequestBody Release release,
-                                                 @PathVariable("id") long id) {
-        return ResponseEntity.ok(service.saveOrUpdate(release));
-    }
-
 }

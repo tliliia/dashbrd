@@ -19,11 +19,18 @@ public interface BaseService<E extends BaseEntity> {
     List<E> findAll();
 
     /**
-     * Сохранить или изменить элемент
+     * Сохранить элемент
      * @param entity элемент
-     * @return созданный/измененный элемент
+     * @return созданный элемент
      */
-    E saveOrUpdate(E entity);
+    E create(E entity);
+
+    /**
+     * Изменить элемент
+     * @param entity элемент
+     * @return измененный элемент
+     */
+    E update(long id, E entity);
 
     /**
      * Удалить элемент

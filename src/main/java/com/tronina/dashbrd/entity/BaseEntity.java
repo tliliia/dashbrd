@@ -19,4 +19,6 @@ public abstract class BaseEntity implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   protected long id;
+
+  public abstract BaseEntity fillFromModel(BaseEntity model);
 }

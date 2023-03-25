@@ -38,15 +38,6 @@ public class TaskService extends AbstractService<Task, TaskRepository> {
         return repository.findAllByPerformerIsNull();
     }
 
-
-    public Task createOrUpdate(long taskId, Task task) {
-        Task originalTask = repository.getReferenceById(taskId);
-//    originalTask
-        return repository.save(task);
-    }
-
-
-
     public void startTask(long taskId) {
         Task task = repository.getReferenceById(taskId);
         if (releaseService.isStarted(task.getRelease())) {
@@ -54,7 +45,7 @@ public class TaskService extends AbstractService<Task, TaskRepository> {
                 throw new BLException("Переход из текущего состояния не поддерживается");
             }
             task.setStatus(Status.IN_PROGRESS);
-            saveOrUpdate(task);
+            update(task.getId(), task);
         } else {
             throw new RuntimeException("Релиз не стартовал");
         }

@@ -17,4 +17,19 @@ import javax.persistence.Table;
 public class User extends BaseEntity {
 
     private String login;
+
+    @Override
+    public BaseEntity fillFromModel(BaseEntity model) {
+        if (model instanceof User) {
+            this.login = ((User)model).getLogin();
+        }
+        return this;
+    }
+
+//    @OneToMany
+//    @JoinColumn (name = "owner_id")
+//    private List<Task> owned;
+//    @OneToMany
+//    @JoinColumn (name = "performer_id")
+//    private List<Task> toDo;
 }

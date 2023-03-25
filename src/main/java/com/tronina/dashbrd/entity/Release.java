@@ -28,4 +28,9 @@ public class Release extends BaseEntity {
     @Transient()
     @OneToMany(mappedBy = "release")
     List<Task> tasks;
+
+    @Override
+    public BaseEntity fillFromModel(BaseEntity model) {
+        return this;
+    }
 }

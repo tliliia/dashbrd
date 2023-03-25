@@ -57,8 +57,8 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
         return ResponseEntity.ok(service.findAll());
     }
 
-    @PutMapping
-    @Operation(summary = "Сохранить или изменить элемент")
+    @PutMapping("/{id}")
+    @Operation(summary = "Изменить элемент")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -70,8 +70,25 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
             @ApiResponse(responseCode = "401", description = "Неавторизованный пользователь", content = @Content),
             @ApiResponse(responseCode = "403", description = "Доступ запрещен", content = @Content),
             @ApiResponse(responseCode = "404", description = "Объект не найден", content = @Content)})
-    public ResponseEntity<E> saveOrUpdate(@RequestBody E element) throws Exception {
-        return ResponseEntity.ok(service.saveOrUpdate(element));
+    public ResponseEntity<E> update(@RequestBody E element, @PathVariable("id") long id) throws Exception {
+        return ResponseEntity.ok(service.update(id, element));
+    }
+
+    @PostMapping
+    @Operation(summary = "Сохранить элемент")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "OK",
+                    content = {@Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = BaseEntity.class))}),
+            @ApiResponse(responseCode = "400", description = "Некорректный запрос", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Неавторизованный пользователь", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Доступ запрещен", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Объект не найден", content = @Content)})
+    public ResponseEntity<E> save(@RequestBody E element) throws Exception {
+        return ResponseEntity.ok(service.create(element));
     }
 
     @DeleteMapping
