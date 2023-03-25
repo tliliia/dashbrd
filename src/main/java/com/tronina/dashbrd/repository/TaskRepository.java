@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends BaseRepository<Task> {
 
-    List<Task> findAllByReleaseId(long id);
+    List<Task> findAllByReleaseId(Long id);
     List<Task> findAllByPerformerIsNull();
 }

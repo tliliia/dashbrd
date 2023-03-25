@@ -25,7 +25,7 @@ public class TaskController extends APIController <Task, TaskService> {
 
     @Operation(summary = "Получить задачи проекта")
     @GetMapping("/release/{releaseId}")
-    public ResponseEntity<List<Task>> getTasksOfProject(@PathVariable(name = "releaseId") long releaseId) {
+    public ResponseEntity<List<Task>> getTasksOfProject(@PathVariable(name = "releaseId") Long releaseId) {
         return ResponseEntity.ok(service.getReleaseTasks(releaseId));
     }
 

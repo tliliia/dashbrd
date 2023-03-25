@@ -26,7 +26,7 @@ public class TaskService extends AbstractService<Task, TaskRepository> {
      * @param releaseId идентификатор релиза
      * @return список задач для релиза
      */
-    public List<Task> getReleaseTasks(long releaseId) {
+    public List<Task> getReleaseTasks(Long releaseId) {
         return repository.findAllByReleaseId(releaseId);
     }
 
@@ -38,7 +38,7 @@ public class TaskService extends AbstractService<Task, TaskRepository> {
         return repository.findAllByPerformerIsNull();
     }
 
-    public void startTask(long taskId) {
+    public void startTask(Long taskId) {
         Task task = repository.getReferenceById(taskId);
         if (releaseService.isStarted(task.getRelease())) {
             if (!task.getStatus().equals(Status.BACKLOG)) {
@@ -51,6 +51,6 @@ public class TaskService extends AbstractService<Task, TaskRepository> {
         }
     }
 
-    public void finishTask(long id) {
+    public void finishTask(Long id) {
     }
 }

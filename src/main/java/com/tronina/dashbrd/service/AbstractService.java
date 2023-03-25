@@ -1,9 +1,9 @@
 package com.tronina.dashbrd.service;
 
 import com.tronina.dashbrd.entity.BaseEntity;
+import com.tronina.dashbrd.exception.NotFoundEntityException;
 import com.tronina.dashbrd.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +18,12 @@ public abstract class AbstractService<E extends BaseEntity, R extends BaseReposi
         this.repository = repository;
     }
 
-    public E findById(long id) {
+    public E findById(Long id) {
         Optional<E> optionalE = repository.findById(id);
         if (optionalE.isPresent()) {
             return optionalE.get();
         } else {
-            throw new RuntimeException(HttpStatus.NOT_FOUND.toString());
+            throw new NotFoundEntityException(id);
         }
     }
 
@@ -35,7 +35,7 @@ public abstract class AbstractService<E extends BaseEntity, R extends BaseReposi
         return repository.save(entity);
     }
 
-    public E update(long id, E entity) {
+    public E update(Long id, E entity) {
         E originalEntity = findById(id);
         originalEntity.fillFromModel(entity);
         return repository.save(entity);
@@ -45,7 +45,7 @@ public abstract class AbstractService<E extends BaseEntity, R extends BaseReposi
         repository.delete(entity);
     }
 
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         E entity = findById(id);
         repository.delete(entity);
     }

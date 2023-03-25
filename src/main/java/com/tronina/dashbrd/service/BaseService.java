@@ -10,7 +10,7 @@ public interface BaseService<E extends BaseEntity> {
      * @param id идентификатор элемента
      * @return элемент
      */
-    E findById(long id);
+    E findById(Long id);
 
     /**
      * Получить список всех эдементов в репозитории
@@ -30,7 +30,7 @@ public interface BaseService<E extends BaseEntity> {
      * @param entity элемент
      * @return измененный элемент
      */
-    E update(long id, E entity);
+    E update(Long id, E entity);
 
     /**
      * Удалить элемент
@@ -42,5 +42,5 @@ public interface BaseService<E extends BaseEntity> {
      * Удалиьт элент по соответсвующему идентификатору
      * @param id идентификатор элемента
      */
-    void deleteById(long id);
+    void deleteById(Long id);
 }

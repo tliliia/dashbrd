@@ -1,8 +1,6 @@
 package com.tronina.dashbrd.controller;
 
-import com.tronina.dashbrd.dto.Model;
 import com.tronina.dashbrd.entity.BaseEntity;
-import com.tronina.dashbrd.repository.BaseRepository;
 import com.tronina.dashbrd.service.AbstractService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -70,7 +68,7 @@ public abstract class APIController <E extends BaseEntity, S extends AbstractSer
             @ApiResponse(responseCode = "401", description = "Неавторизованный пользователь", content = @Content),
             @ApiResponse(responseCode = "403", description = "Доступ запрещен", content = @Content),
             @ApiResponse(responseCode = "404", description = "Объект не найден", content = @Content)})
-    public ResponseEntity<E> update(@RequestBody E element, @PathVariable("id") long id) throws Exception {
+    public ResponseEntity<E> update(@RequestBody E element, @PathVariable("id") Long id) throws Exception {
         return ResponseEntity.ok(service.update(id, element));
     }
 

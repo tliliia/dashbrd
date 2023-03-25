@@ -20,6 +20,11 @@ import java.time.format.DateTimeParseException;
 @ControllerAdvice()
 public class RestExceptionHandler {
 
+  @ExceptionHandler(NotFoundEntityException.class)
+  protected <T extends NotFoundEntityException> ResponseEntity<ErrorResponse> exceptionHandler(T exception) {
+    return new ResponseEntity<>(createErrorResponse(exception), HttpStatus.NOT_FOUND);
+  }
+
   @ExceptionHandler(SQLException.class)
   protected <T extends SQLException> ResponseEntity<ErrorResponse> exceptionHandler(T exception) {
     return new ResponseEntity<>(createErrorResponse(exception), HttpStatus.INTERNAL_SERVER_ERROR);
